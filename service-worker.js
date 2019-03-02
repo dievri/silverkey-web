@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/silverkey-web/precache-manifest.a40de93dd5e163925e7951bc1b680028.js"
+  "/silverkey-web/precache-manifest.077820a4e996e88c10310c43eefc3e73.js"
 );
 
 workbox.clientsClaim();
