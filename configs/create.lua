@@ -19,6 +19,8 @@ local res, err = httpc:request({
     body = "dir=true"
   })
 
+  ngx.sleep(10)
+
   if not res then
     ngx.say("failed to request: ", err)
     return

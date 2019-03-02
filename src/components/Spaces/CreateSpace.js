@@ -6,22 +6,31 @@ class CreateSpace extends Component {
     super();
     this.state = {
       space: "",
-      status: null
+      status: null,
+      waiting: null
     };
   }
   handleSubmit = async e => {
     e.preventDefault();
+    this.setState({ waiting: true });
     try {
       const response = await API.post("api/v1/space", {
         space_name: this.state.space
       });
       console.log(response.data);
-      if (response.data.status == true) {
+      if (response.data.status === true) {
         this.setState({
-          status: true
+          waiting: false,
+          status: true,
+          space: ""
         });
       }
     } catch (error) {
+      this.setState({
+        waiting: false,
+        status: false,
+        space: ""
+      });
       console.log(error);
     }
   };
@@ -33,7 +42,14 @@ class CreateSpace extends Component {
   };
 
   render() {
-    const alert = this.state.status ? (
+    const waiting = this.state.waiting ? (
+      <div className="alert alert-warning my-5" role="alert">
+        <div class="fa">
+          <i class="fas fa-spinner fa-spin" />
+        </div>
+        Waiting for response
+      </div>
+    ) : this.state.status ? (
       <div className="alert alert-success my-5" role="alert">
         Directory successfully set
       </div>
@@ -53,6 +69,7 @@ class CreateSpace extends Component {
                   className="form-control"
                   placeholder="Space name"
                   onChange={e => this.handleChange(e)}
+                  value={this.state.space}
                 />
               </div>
               <button type="submit" className="btn btn-primary btn-block">
@@ -61,7 +78,7 @@ class CreateSpace extends Component {
             </form>
           </div>
         </div>
-        {alert}
+        {waiting}
       </section>
     );
   }
