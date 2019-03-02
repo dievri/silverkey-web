@@ -22,3 +22,7 @@ code {
 #home-section {
   max-width: 970px;
 }
+
+#home-section .link:hover {
+  text-decoration: none;
+}

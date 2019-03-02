@@ -6,13 +6,13 @@ const Download = () => {
       <div className="container text-center">
         <div className="row">
           <div className="col-sm-4 py-3">
-            <i class="fab fa-windows fa-4x" />
+            <i className="fab fa-windows fa-4x" />
           </div>
           <div className="col-sm-4 py-3">
-            <i class="fab fa-linux fa-4x" />
+            <i className="fab fa-linux fa-4x" />
           </div>
           <div className="col-sm-4 py-3">
-            <i class="fab fa-apple fa-4x" />
+            <i className="fab fa-apple fa-4x" />
           </div>
         </div>
       </div>
