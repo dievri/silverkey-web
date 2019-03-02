@@ -1,0 +1,18 @@
+version: "3"
+services:
+  web:
+    image: openresty/openresty
+    volumes:
+      - ./configs:/etc/nginx/conf.d
+      - ./build:/usr/local/openresty/nginx/html/
+    ports:
+      - "8080:80"
+  etcd:
+    image: bitnami/etcd
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+    volumes:
+      - etcd_data:/bitnami
+volumes:
+  etcd_data:
+    driver: local
