@@ -5,7 +5,8 @@ class CreateSpace extends Component {
   constructor() {
     super();
     this.state = {
-      space: ""
+      space: "",
+      status: null
     };
   }
   handleSubmit = async e => {
@@ -15,8 +16,12 @@ class CreateSpace extends Component {
       const response = await API.post("api/v1/space", {
         space_name: this.state.space
       });
-      console.log(response);
       console.log(response.data);
+      if (response.data.status == true) {
+        this.setState({
+          status: true
+        });
+      }
     } catch (error) {
       console.log(error);
     }
@@ -29,6 +34,15 @@ class CreateSpace extends Component {
   };
 
   render() {
+    const alert = this.state.status ? (
+      <div className="alert alert-success my-5" role="alert">
+        Directory successfully set
+      </div>
+    ) : this.state.status === false ? (
+      <div className="alert alert-danger my-5" role="alert">
+        Error while trying to create
+      </div>
+    ) : null;
     return (
       <section className="container py-5">
         <div className="row">
@@ -48,6 +62,7 @@ class CreateSpace extends Component {
             </form>
           </div>
         </div>
+        {alert}
       </section>
     );
   }
