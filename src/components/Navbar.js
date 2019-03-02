@@ -29,11 +29,6 @@ const Navbar = () => {
               Download
             </Link>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="#">
-              Empty link
-            </a>
-          </li>
         </ul>
       </div>
     </nav>
