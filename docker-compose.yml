@@ -1,6 +1,6 @@
 version: "3"
 services:
-  web:
+  frontend:
     image: openresty/openresty
     volumes:
       - ./configs:/etc/nginx/conf.d
