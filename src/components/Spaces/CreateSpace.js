@@ -11,7 +11,6 @@ class CreateSpace extends Component {
   }
   handleSubmit = async e => {
     e.preventDefault();
-    console.log("prevented");
     try {
       const response = await API.post("api/v1/space", {
         space_name: this.state.space
