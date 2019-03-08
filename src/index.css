@@ -26,3 +26,7 @@ code {
 #home-section .link:hover {
   text-decoration: none;
 }
+
+.signup {
+  max-width: 400px;
+}

@@ -5,6 +5,8 @@ import Download from "./components/Download";
 import About from "./components/About";
 import Home from "./components/Home";
 import CreateSpace from "./components/Spaces/CreateSpace";
+import SignUp from "./components/Auth/SignUp";
+import LogIn from "./components/Auth/LogIn";
 class App extends Component {
   render() {
     return (
@@ -18,6 +20,8 @@ class App extends Component {
             <Route path="/download" component={Download} />
             <Route path="/about" component={About} />
             <Route path="/create" component={CreateSpace} />
+            <Route path="/signup" component={SignUp} />
+            <Route path="/login" component={LogIn} />
           </Switch>
         </section>
       </div>

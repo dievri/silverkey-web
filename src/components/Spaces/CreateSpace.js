@@ -7,7 +7,8 @@ class CreateSpace extends Component {
     this.state = {
       space: "",
       status: null,
-      waiting: null
+      waiting: null,
+      exists: null
     };
   }
   handleSubmit = async e => {
@@ -23,6 +24,12 @@ class CreateSpace extends Component {
           waiting: false,
           status: true,
           space: ""
+        });
+      } else if (response.data.status === false) {
+        this.setState({
+          waiting: false,
+          status: false,
+          exists: response.data.exists
         });
       }
     } catch (error) {
@@ -42,9 +49,12 @@ class CreateSpace extends Component {
   };
 
   render() {
+    const exists = this.state.exists ? (
+      <button className="btn btn-info btn-block">Join</button>
+    ) : null;
     const waiting = this.state.waiting ? (
       <div className="alert alert-warning my-5" role="alert">
-        <div class="fa">
+        <div class="fa mr-2">
           <i class="fas fa-spinner fa-spin" />
         </div>
         Waiting for response
@@ -53,14 +63,26 @@ class CreateSpace extends Component {
       <div className="alert alert-success my-5" role="alert">
         Directory successfully set
       </div>
+    ) : this.state.status === false && this.state.exists ? (
+      <div>
+        <div className="alert alert-info mt-5 mb-1" role="alert">
+          Space already exists.
+        </div>
+        {exists}
+      </div>
     ) : this.state.status === false ? (
       <div className="alert alert-danger my-5" role="alert">
-        Error while trying to create
+        Error while creating
       </div>
     ) : null;
+
+    let classes = "row";
+    if (this.state.waiting) {
+      classes += " invisible";
+    }
     return (
       <section className="container py-5">
-        <div className="row">
+        <div className={classes}>
           <div className="col-md-6 offset-md-3">
             <form onSubmit={e => this.handleSubmit(e)}>
               <div className="form-group">
