@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import CreateSpace from "./components/Spaces/CreateSpace";
 import SignUp from "./components/Auth/SignUp";
 import LogIn from "./components/Auth/LogIn";
+import { connect } from "react-redux";
 class App extends Component {
   render() {
     return (
@@ -28,5 +29,11 @@ class App extends Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    state
+  };
+};
 
 export default App;

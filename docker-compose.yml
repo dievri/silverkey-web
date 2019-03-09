@@ -24,10 +24,10 @@ services:
       - "8080:80"
     networks:
       - app-tier
-  ui:
-    image: buddho/etcd-browser
-    environment:
-      ETCD_HOST: etcd
-      ETCD_PORT: 2379
-    ports:
-      - 0.0.0.0:2888:8000
+  # ui:
+  #   image: buddho/etcd-browser
+  #   environment:
+  #     ETCD_HOST: etcd
+  #     ETCD_PORT: 2379
+  #   ports:
+  #     - 0.0.0.0:2888:8000

@@ -34,7 +34,10 @@ end
 local res, err = httpc:request({
     path="/v2/keys/spaces/" .. value["space_name"],
     method = "PUT",
-    body = "dir=true"
+    body = "dir=true",
+    headers = {
+    ["Content-Type"] = "application/x-www-form-urlencoded",
+  }
   })
 
   ngx.sleep(10)
@@ -47,4 +50,3 @@ local res, err = httpc:request({
 ngx.status = ngx.HTTP_OK  
 ngx.say(cjson.encode({ status = true }))  
 return ngx.exit(ngx.HTTP_OK)  
-
