@@ -8,7 +8,9 @@ class SignUp extends Component {
     this.state = {
       username: "",
       email: "",
-      password: ""
+      password: "",
+      status: null,
+      exists: null
     };
   }
 
@@ -31,8 +33,20 @@ class SignUp extends Component {
       console.log(response.data);
       if (response.data.status === true) {
         console.log("success");
-      } else {
-        console.log("not so good");
+        this.setState({
+          username: "",
+          email: "",
+          password: "",
+          status: true
+        });
+      } else if (response.data.exists === true) {
+        console.log("already exists");
+        this.setState({
+          username: "",
+          email: "",
+          password: "",
+          exists: true
+        });
       }
     } catch (error) {
       console.log(error);
@@ -40,6 +54,17 @@ class SignUp extends Component {
   }
 
   render() {
+    const successAlert = (
+      <div className="alert alert-success my-3" role="alert">
+        User successfully created.
+      </div>
+    );
+
+    const existsAlert = (
+      <div className="alert alert-danger my-3" role="alert">
+        User already exists
+      </div>
+    );
     return (
       <div className="container mt-5">
         <form
@@ -80,6 +105,11 @@ class SignUp extends Component {
           <button type="submit" className="btn btn-info btn-block">
             Sign Up
           </button>
+          {this.state.status
+            ? successAlert
+            : this.state.exists
+            ? existsAlert
+            : null}
         </form>
       </div>
     );

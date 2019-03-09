@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Download from "./components/Download";
 import About from "./components/About";
@@ -9,11 +9,28 @@ import SignUp from "./components/Auth/SignUp";
 import LogIn from "./components/Auth/LogIn";
 import { connect } from "react-redux";
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false,
+      username: ""
+    };
+
+    this.handleLogin = this.handleLogin.bind(this);
+  }
+
+  handleLogin(e) {
+    this.setState({
+      loggedIn: true,
+      username: e
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <header>
-          <Navbar />
+          <Navbar loggedIn={this.state.loggedIn} />
         </header>
         <section>
           <Switch>
@@ -22,7 +39,15 @@ class App extends Component {
             <Route path="/about" component={About} />
             <Route path="/create" component={CreateSpace} />
             <Route path="/signup" component={SignUp} />
-            <Route path="/login" component={LogIn} />
+            <Route
+              path="/login"
+              render={() => (
+                <LogIn
+                  handleLogin={this.handleLogin}
+                  loggedIn={this.state.loggedIn}
+                />
+              )}
+            />
           </Switch>
         </section>
       </div>

@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../images/logo.svg";
-const Navbar = () => {
+const Navbar = props => {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <button
@@ -34,16 +34,26 @@ const Navbar = () => {
               About
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to="/signup" className="nav-link">
-              Sign Up
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link to="/login" className="nav-link">
-              Log In
-            </Link>
-          </li>
+          {props.loggedIn ? (
+            <li className="nav-item">
+              <Link to="/logout" className="nav-link">
+                Logout
+              </Link>
+            </li>
+          ) : (
+            <>
+              <li className="nav-item">
+                <Link to="/signup" className="nav-link">
+                  Sign Up
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link to="/login" className="nav-link">
+                  Log In
+                </Link>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>
