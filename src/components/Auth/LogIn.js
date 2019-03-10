@@ -40,6 +40,9 @@ class LogIn extends Component {
         this.handleLogin(this.state.username);
       } else if (response.data.exists === false) {
         console.log("User not exists");
+        this.setState({
+          exists: false
+        });
       }
     } catch (error) {
       console.log(error);
@@ -81,7 +84,7 @@ class LogIn extends Component {
           </button>
           {this.state.exists === false ? (
             <div className="alert alert-danger my-3" role="alert">
-              User already exists
+              User not exists
             </div>
           ) : null}
         </form>

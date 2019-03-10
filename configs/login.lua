@@ -24,14 +24,21 @@ ngx.say(cjson.encode({exists = false }))
   return
 end
 
+-- get password
 local res, err = httpc:request_uri("http://etcd:2379/v2/keys/user/" .. value["username"] .. "/password")
 if not res then
     ngx.say("failed to request: ", err)
     return
 end
 
+
+-- check password
 local decoded_body = cjson.decode(res.body)  
 if decoded_body["node"]["value"] == value["password"] then
+-- start session
+local session = require "resty.session".start()
+session.data.name = value["username"]
+session:save()
 ngx.say(cjson.encode({success = true }))  
   return
 end

@@ -36,7 +36,11 @@ const Navbar = props => {
           </li>
           {props.loggedIn ? (
             <li className="nav-item">
-              <Link to="/logout" className="nav-link">
+              <Link
+                to="/login"
+                className="nav-link"
+                onClick={props.handleLogout}
+              >
                 Logout
               </Link>
             </li>

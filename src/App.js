@@ -7,7 +7,8 @@ import Home from "./components/Home";
 import CreateSpace from "./components/Spaces/CreateSpace";
 import SignUp from "./components/Auth/SignUp";
 import LogIn from "./components/Auth/LogIn";
-import { connect } from "react-redux";
+import API from "./config/api";
+
 class App extends Component {
   constructor() {
     super();
@@ -17,6 +18,7 @@ class App extends Component {
     };
 
     this.handleLogin = this.handleLogin.bind(this);
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleLogin(e) {
@@ -26,11 +28,38 @@ class App extends Component {
     });
   }
 
+  handleLogout() {
+    const response = API.get("api/v1/logout").then(res => {
+      console.log(res.data);
+      if (res.data.loggedOut) {
+        this.setState({
+          loggedIn: false,
+          username: ""
+        });
+      }
+    });
+  }
+
+  componentDidMount() {
+    const response = API.get("api/v1/getname").then(res => {
+      console.log(res.data);
+      if (res.data.username !== null) {
+        this.setState({
+          loggedIn: true,
+          username: res.data.username
+        });
+      }
+    });
+  }
+
   render() {
     return (
       <div className="App">
         <header>
-          <Navbar loggedIn={this.state.loggedIn} />
+          <Navbar
+            loggedIn={this.state.loggedIn}
+            handleLogout={this.handleLogout}
+          />
         </header>
         <section>
           <Switch>
