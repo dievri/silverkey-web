@@ -43,7 +43,7 @@ class App extends Component {
   componentDidMount() {
     const response = API.get("api/v1/getname").then(res => {
       console.log(res.data);
-      if (res.data.username !== null) {
+      if (res.data.username) {
         this.setState({
           loggedIn: true,
           username: res.data.username
